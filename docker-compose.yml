@@ -1,0 +1,16 @@
+version: "3"
+services:
+  wxedge-relay:
+    image: alpine/socat
+    container_name: wxedge-relay
+    command: "TCP-LISTEN:18888,fork,reuseaddr TCP:192.168.1.200:18888"
+    ports:
+        - "18888:18888"
+    restart: unless-stopped
+  router-relay:
+    image: alpine/socat
+    container_name: router-relay
+    command: "TCP-LISTEN:3180,fork,reuseaddr TCP:192.168.1.1:80"
+    ports:
+        - "3180:3180"
+    restart: unless-stopped
